@@ -46,6 +46,9 @@
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="IZ3-j1-KFN" secondAttribute="height" multiplier="3:4" id="5Pa-iH-Y7J"/>
                                 </constraints>
+                                <variation key="widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="16" y="123" width="200" height="268"/>
+                                </variation>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Last Updated: 01/25/2015" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tQq-9p-NFt" userLabel="Last Updated Label">
                                 <rect key="frame" x="324" y="570" width="260" height="15"/>
@@ -63,8 +66,9 @@
                                         <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                         <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES" calendarEvent="YES"/>
-                                        <variation key="widthClass=compact">
+                                        <variation key="widthClass=compact" misplaced="YES">
                                             <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="16"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="160" height="204"/>
                                         </variation>
                                     </textView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="beer, bend, available-elsewhere, pdx, corporate-kinda" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YAV-8J-eMa" userLabel="Tags Label">
@@ -72,8 +76,9 @@
                                         <fontDescription key="fontDescription" name="Optima-BoldItalic" family="Optima" pointSize="16"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
-                                        <variation key="widthClass=compact">
+                                        <variation key="widthClass=compact" misplaced="YES">
                                             <fontDescription key="fontDescription" name="Optima-BoldItalic" family="Optima" pointSize="12"/>
+                                            <rect key="frame" x="0.0" y="211" width="160" height="57"/>
                                         </variation>
                                     </label>
                                 </subviews>
@@ -93,7 +98,8 @@
                                         <exclude reference="fPa-Ne-Ypx"/>
                                     </mask>
                                 </variation>
-                                <variation key="widthClass=compact">
+                                <variation key="widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="224" y="123" width="160" height="268"/>
                                     <mask key="constraints">
                                         <include reference="fPa-Ne-Ypx"/>
                                     </mask>
@@ -106,12 +112,16 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="IZ3-j1-KFN" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leadingMargin" id="2Yv-JZ-g39"/>
-                            <constraint firstItem="IZ3-j1-KFN" firstAttribute="height" secondItem="zEm-XH-E23" secondAttribute="height" id="9YC-rz-NVf"/>
+                            <constraint firstItem="IZ3-j1-KFN" firstAttribute="height" secondItem="zEm-XH-E23" secondAttribute="height" id="9YC-rz-NVf">
+                                <variation key="heightClass=compact" constant="44"/>
+                            </constraint>
                             <constraint firstItem="tQq-9p-NFt" firstAttribute="trailing" secondItem="svH-Pt-448" secondAttribute="trailingMargin" id="CgJ-iX-60J"/>
                             <constraint firstItem="zEm-XH-E23" firstAttribute="trailing" secondItem="svH-Pt-448" secondAttribute="trailingMargin" id="Hvy-rW-FK8"/>
                             <constraint firstItem="0XM-y9-sOw" firstAttribute="trailing" secondItem="svH-Pt-448" secondAttribute="trailingMargin" id="I0S-6B-W1F"/>
                             <constraint firstItem="zEm-XH-E23" firstAttribute="leading" secondItem="IZ3-j1-KFN" secondAttribute="trailing" constant="8" id="KKA-A4-rwh"/>
                             <constraint firstItem="zEm-XH-E23" firstAttribute="top" secondItem="0XM-y9-sOw" secondAttribute="bottom" constant="8" id="MJY-CT-SWb"/>
+                            <constraint firstItem="nac-gU-iBV" firstAttribute="top" secondItem="zEm-XH-E23" secondAttribute="bottom" constant="8" id="VwY-Ki-S3S"/>
+                            <constraint firstItem="nac-gU-iBV" firstAttribute="width" secondItem="zEm-XH-E23" secondAttribute="width" id="YNp-Ad-tKY"/>
                             <constraint firstItem="0XM-y9-sOw" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leadingMargin" id="coc-Z9-0g8"/>
                             <constraint firstItem="IZ3-j1-KFN" firstAttribute="width" secondItem="svH-Pt-448" secondAttribute="width" multiplier="1:2" id="dW0-jw-VUi"/>
                             <constraint firstItem="nac-gU-iBV" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leadingMargin" id="dc0-x1-cb8"/>
@@ -122,6 +132,21 @@
                             <constraint firstItem="IZ3-j1-KFN" firstAttribute="top" secondItem="0XM-y9-sOw" secondAttribute="bottom" constant="8" id="wtM-uf-7b1"/>
                             <constraint firstItem="nac-gU-iBV" firstAttribute="bottom" secondItem="tQq-9p-NFt" secondAttribute="top" constant="-8" id="zPc-tS-116"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="VwY-Ki-S3S"/>
+                                <exclude reference="YNp-Ad-tKY"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=compact">
+                            <mask key="constraints">
+                                <exclude reference="dW0-jw-VUi"/>
+                                <include reference="VwY-Ki-S3S"/>
+                                <include reference="YNp-Ad-tKY"/>
+                                <exclude reference="dc0-x1-cb8"/>
+                                <exclude reference="hvf-tL-c8z"/>
+                            </mask>
+                        </variation>
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Detail" id="mOI-FS-AaM"/>
@@ -135,7 +160,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FJe-Yq-33r" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="679.5" y="41"/>
+            <point key="canvasLocation" x="679" y="40.5"/>
         </scene>
         <!--Split View Controller-->
         <scene sceneID="Nki-YV-4Qg">

@@ -8,15 +8,22 @@
 
 import Foundation
 import CoreData
+import UIKit
 
 class Item: NSManagedObject {
 
-    @NSManaged var image: NSData
+    @NSManaged var imageData: NSData
     @NSManaged var rating: Float
     @NSManaged var ratingDate: NSTimeInterval
     @NSManaged var comments: String
     @NSManaged var name: String
     @NSManaged var tags: NSSet
+
+    var image: UIImage? {
+        get {
+            return UIImage(data: imageData)
+        }
+    }
 
     class func entityName() -> String {
         return "Item"

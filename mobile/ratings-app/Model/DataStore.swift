@@ -53,8 +53,12 @@ class DataStore {
     }
 
     func makeNewItem() -> Item {
-        return NSEntityDescription.insertNewObjectForEntityForName(Item.entityName(), inManagedObjectContext:managedObjectContext!) as Item
-
+        var item = NSEntityDescription.insertNewObjectForEntityForName(Item.entityName(), inManagedObjectContext:managedObjectContext!) as Item
+        item.name = ""
+        item.comments = ""
+        item.rating = 0
+        item.ratingDate = NSDate().timeIntervalSinceReferenceDate
+        return item
     }
 
     func makeNewTagNamed(name: String) -> Tag {

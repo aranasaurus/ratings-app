@@ -48,7 +48,10 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     func insertNewObject(sender: AnyObject) {
         println("insertNewObject( \(sender) )")
         if let newItem = dataStore?.makeNewItem() {
-            newItem.name = "\(NSDate())"
+            newItem.name = "Test thing"
+            newItem.comments = "Test thing tasted pretty testable."
+            newItem.rating = Float(arc4random_uniform(100)) / Float(100)
+            newItem.ratingDate = NSDate().timeIntervalSinceReferenceDate
             dataStore?.saveContext()
         }
     }
@@ -58,9 +61,9 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showDetail" {
             if let indexPath = self.tableView.indexPathForSelectedRow() {
-            let object = self.fetchedResultsController.objectAtIndexPath(indexPath) as NSManagedObject
+            let object = self.fetchedResultsController.objectAtIndexPath(indexPath) as Item
                 let controller = (segue.destinationViewController as UINavigationController).topViewController as DetailViewController
-                controller.detailItem = object
+                controller.item = object
                 controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
                 controller.navigationItem.leftItemsSupplementBackButton = true
             }
@@ -106,7 +109,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
 
     func configureCell(cell: ItemTableViewCell, atIndexPath indexPath: NSIndexPath) {
         if let item: Item = self.fetchedResultsController.objectAtIndexPath(indexPath) as? Item {
-            cell.itemImageView.image = UIImage(data: item.image)
+            cell.itemImageView.image = item.image
             cell.nameLabel.text = item.name
             cell.ratingView.value = item.rating
         }

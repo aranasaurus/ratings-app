@@ -4,6 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--Master-->
@@ -40,15 +41,18 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.94999999999999996" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="nac-gU-iBV" userLabel="Rating">
-                                <rect key="frame" x="14" y="532" width="572" height="31"/>
-                            </slider>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="IZ3-j1-KFN" userLabel="Image">
                                 <rect key="frame" x="16" y="123" width="300" height="401"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="IZ3-j1-KFN" secondAttribute="height" multiplier="3:4" id="5Pa-iH-Y7J"/>
                                 </constraints>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Last Updated: 01/25/2015" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tQq-9p-NFt" userLabel="Last Updated Label">
+                                <rect key="frame" x="324" y="570" width="260" height="15"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zEm-XH-E23" userLabel="Comments and Tags View">
                                 <rect key="frame" x="324" y="123" width="260" height="401"/>
                                 <subviews>
@@ -59,12 +63,18 @@
                                         <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                         <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES" calendarEvent="YES"/>
+                                        <variation key="widthClass=compact">
+                                            <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="16"/>
+                                        </variation>
                                     </textView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="beer, bend, available-elsewhere, pdx, corporate-kinda" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YAV-8J-eMa" userLabel="Tags Label">
-                                        <rect key="frame" x="0.0" y="345" width="260" height="38.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="beer, bend, available-elsewhere, pdx, corporate-kinda" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YAV-8J-eMa" userLabel="Tags Label">
+                                        <rect key="frame" x="0.0" y="345" width="260" height="39"/>
                                         <fontDescription key="fontDescription" name="Optima-BoldItalic" family="Optima" pointSize="16"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
+                                        <variation key="widthClass=compact">
+                                            <fontDescription key="fontDescription" name="Optima-BoldItalic" family="Optima" pointSize="12"/>
+                                        </variation>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -75,15 +85,23 @@
                                     <constraint firstItem="mDB-J3-Lau" firstAttribute="width" secondItem="YAV-8J-eMa" secondAttribute="width" id="7L2-TK-9Al"/>
                                     <constraint firstItem="mDB-J3-Lau" firstAttribute="centerX" secondItem="YAV-8J-eMa" secondAttribute="centerX" id="EBW-ia-8lT"/>
                                     <constraint firstAttribute="trailing" secondItem="mDB-J3-Lau" secondAttribute="trailing" id="Y2N-vQ-ahY"/>
+                                    <constraint firstAttribute="bottom" secondItem="YAV-8J-eMa" secondAttribute="bottom" id="fPa-Ne-Ypx"/>
                                     <constraint firstItem="YAV-8J-eMa" firstAttribute="top" secondItem="mDB-J3-Lau" secondAttribute="bottom" constant="8" id="odG-Fs-lvh"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="fPa-Ne-Ypx"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="fPa-Ne-Ypx"/>
+                                    </mask>
+                                </variation>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Last Updated: 01/25/2015" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tQq-9p-NFt" userLabel="Last Updated Label">
-                                <rect key="frame" x="324" y="570" width="260" height="14.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.94999999999999996" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="nac-gU-iBV" userLabel="Rating">
+                                <rect key="frame" x="14" y="532" width="572" height="31"/>
+                            </slider>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -95,7 +113,7 @@
                             <constraint firstItem="zEm-XH-E23" firstAttribute="leading" secondItem="IZ3-j1-KFN" secondAttribute="trailing" constant="8" id="KKA-A4-rwh"/>
                             <constraint firstItem="zEm-XH-E23" firstAttribute="top" secondItem="0XM-y9-sOw" secondAttribute="bottom" constant="8" id="MJY-CT-SWb"/>
                             <constraint firstItem="0XM-y9-sOw" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leadingMargin" id="coc-Z9-0g8"/>
-                            <constraint firstItem="IZ3-j1-KFN" firstAttribute="width" secondItem="svH-Pt-448" secondAttribute="height" multiplier="1:2" id="dW0-jw-VUi"/>
+                            <constraint firstItem="IZ3-j1-KFN" firstAttribute="width" secondItem="svH-Pt-448" secondAttribute="width" multiplier="1:2" id="dW0-jw-VUi"/>
                             <constraint firstItem="nac-gU-iBV" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leadingMargin" id="dc0-x1-cb8"/>
                             <constraint firstItem="nac-gU-iBV" firstAttribute="top" secondItem="IZ3-j1-KFN" secondAttribute="bottom" constant="8" symbolic="YES" id="hvf-tL-c8z"/>
                             <constraint firstItem="nac-gU-iBV" firstAttribute="trailing" secondItem="svH-Pt-448" secondAttribute="trailingMargin" id="ipZ-Qf-WQC"/>
@@ -108,12 +126,16 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Detail" id="mOI-FS-AaM"/>
                     <connections>
-                        <outlet property="detailDescriptionLabel" destination="0XM-y9-sOw" id="deQ-Na-JPF"/>
+                        <outlet property="commentsTextView" destination="mDB-J3-Lau" id="tUt-se-N51"/>
+                        <outlet property="itemImageView" destination="IZ3-j1-KFN" id="WG9-EP-Sos"/>
+                        <outlet property="lastUpdatedLabel" destination="tQq-9p-NFt" id="Wde-aG-cj4"/>
+                        <outlet property="nameLabel" destination="0XM-y9-sOw" id="Nek-bj-HI4"/>
+                        <outlet property="ratingSlider" destination="nac-gU-iBV" id="RVl-uI-xOh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FJe-Yq-33r" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="680" y="41"/>
+            <point key="canvasLocation" x="679.5" y="41"/>
         </scene>
         <!--Split View Controller-->
         <scene sceneID="Nki-YV-4Qg">

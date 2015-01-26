@@ -27,8 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         let controller = masterNavigationController.topViewController as MasterViewController
         let modelURL = NSBundle.mainBundle().URLForResource("ratings_app", withExtension: "momd")!
         let storeURL = self.applicationDocumentsDirectory.URLByAppendingPathComponent("ratings_app.sqlite")
-        dataStore = DataStore(storeURL: storeURL, modelURL: modelURL)
-        controller.managedObjectContext = dataStore?.managedObjectContext
+        controller.dataStore = DataStore(storeURL: storeURL, modelURL: modelURL)
         return true
     }
 

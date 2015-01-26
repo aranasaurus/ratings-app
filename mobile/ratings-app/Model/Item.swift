@@ -12,7 +12,7 @@ import CoreData
 class Item: NSManagedObject {
 
     @NSManaged var image: NSData
-    @NSManaged var rating: Int16
+    @NSManaged var rating: Float
     @NSManaged var ratingDate: NSTimeInterval
     @NSManaged var comments: String
     @NSManaged var name: String

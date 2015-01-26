@@ -18,6 +18,7 @@
 		94907D4F1A757A8A0057A724 /* ratings_appTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94907D4E1A757A8A0057A724 /* ratings_appTests.swift */; };
 		94F81B681A75B94200DA6AC0 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F81B671A75B94200DA6AC0 /* Item.swift */; };
 		94F81B6A1A75B94200DA6AC0 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F81B691A75B94200DA6AC0 /* Tag.swift */; };
+		94F81B6C1A75C4D100DA6AC0 /* ItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F81B6B1A75C4D100DA6AC0 /* ItemTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,7 @@
 		94907D4E1A757A8A0057A724 /* ratings_appTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ratings_appTests.swift; sourceTree = "<group>"; };
 		94F81B671A75B94200DA6AC0 /* Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Item.swift; path = Model/Item.swift; sourceTree = "<group>"; };
 		94F81B691A75B94200DA6AC0 /* Tag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Tag.swift; path = Model/Tag.swift; sourceTree = "<group>"; };
+		94F81B6B1A75C4D100DA6AC0 /* ItemTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +94,7 @@
 				94907D381A757A8A0057A724 /* MasterViewController.swift */,
 				94907D3A1A757A8A0057A724 /* DetailViewController.swift */,
 				94907D3C1A757A8A0057A724 /* Main.storyboard */,
+				94F81B6B1A75C4D100DA6AC0 /* ItemTableViewCell.swift */,
 				94907D3F1A757A8A0057A724 /* Images.xcassets */,
 				94907D411A757A8A0057A724 /* LaunchScreen.xib */,
 				94907D351A757A8A0057A724 /* ratings_app.xcdatamodeld */,
@@ -239,6 +242,7 @@
 				94907D341A757A8A0057A724 /* AppDelegate.swift in Sources */,
 				94907D391A757A8A0057A724 /* MasterViewController.swift in Sources */,
 				94F81B6A1A75B94200DA6AC0 /* Tag.swift in Sources */,
+				94F81B6C1A75C4D100DA6AC0 /* ItemTableViewCell.swift in Sources */,
 				946073881A759FD50057866D /* DataStore.swift in Sources */,
 				94F81B681A75B94200DA6AC0 /* Item.swift in Sources */,
 				94907D3B1A757A8A0057A724 /* DetailViewController.swift in Sources */,

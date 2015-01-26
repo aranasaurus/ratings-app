@@ -14,4 +14,7 @@ class Tag: NSManagedObject {
     @NSManaged var name: String
     @NSManaged var items: NSSet
 
+    class func entityName() -> String {
+        return "Tag"
+    }
 }

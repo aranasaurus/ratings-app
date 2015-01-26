@@ -10,7 +10,6 @@ import Foundation
 import CoreData
 
 
-
 class DataStore {
 
     let managedObjectContext: NSManagedObjectContext?
@@ -51,6 +50,17 @@ class DataStore {
                 abort()
             }
         }
+    }
+
+    func makeNewItem() -> Item {
+        return NSEntityDescription.insertNewObjectForEntityForName(Item.entityName(), inManagedObjectContext:managedObjectContext!) as Item
+
+    }
+
+    func makeNewTagNamed(name: String) -> Tag {
+        var tag = NSEntityDescription.insertNewObjectForEntityForName(Tag.entityName(), inManagedObjectContext: managedObjectContext!) as Tag
+        tag.name = name
+        return tag
     }
 
 }

@@ -11,11 +11,15 @@ import CoreData
 
 class Item: NSManagedObject {
 
-    @NSManaged var createdAt: NSTimeInterval
     @NSManaged var image: NSData
     @NSManaged var rating: Int16
+    @NSManaged var ratingDate: NSTimeInterval
     @NSManaged var comments: String
     @NSManaged var name: String
     @NSManaged var tags: NSSet
+
+    class func entityName() -> String {
+        return "Item"
+    }
 
 }

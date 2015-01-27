@@ -48,6 +48,11 @@ class DetailViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    override func traitCollectionDidChange(previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        println("\(traitCollection.horizontalSizeClass.rawValue), \(traitCollection.verticalSizeClass.rawValue)")
+    }
+
 
 }
 

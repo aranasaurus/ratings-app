@@ -7,18 +7,19 @@
 //
 
 import UIKit
-import CoreData
+import Realm
 
-class MasterViewController: UITableViewController, NSFetchedResultsControllerDelegate {
+class MasterViewController: UITableViewController {
 
     var detailViewController: DetailViewController? = nil
-    var dataStore: DataStore?
-    var managedObjectContext: NSManagedObjectContext? {
-        get {
-            return dataStore?.managedObjectContext
-        }
-    }
 
+    var realm: RLMRealm {
+        return RLMRealm.defaultRealm()
+    }
+    var token: RLMNotificationToken = RLMNotificationToken()
+    var items: [Item] {
+        return Item.allObjects().arraySortedByProperty("ratingDate", ascending: false) as [Item]
+    }
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -38,6 +39,12 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
             let controllers = split.viewControllers
             self.detailViewController = controllers[controllers.count-1].topViewController as? DetailViewController
         }
+
+        token = realm.addNotificationBlock { (notification: String!, rlm: RLMRealm!) in
+            if notification == RLMRealmDidChangeNotification {
+                self.tableView.reloadData()
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -46,14 +53,18 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     }
 
     func insertNewObject(sender: AnyObject) {
-        println("insertNewObject( \(sender) )")
-        if let newItem = dataStore?.makeNewItem() {
-            newItem.name = "Test thing"
-            newItem.comments = "Test thing tasted pretty testable."
-            newItem.rating = Float(arc4random_uniform(100)) / Float(100)
-            newItem.ratingDate = NSDate().timeIntervalSinceReferenceDate
-            dataStore?.saveContext()
-        }
+        let names = [ "Black Butte Porter", "Maker's Mark", "Big Kahuna Burger", "Ethiopian", "Pulp Fiction", "The Tick" ]
+        let comments = [ "Delicious.", "Yummy!", "HUGE!", "Amazing", "Room for improvement.", "LOVE!", "meh.", "Dark, with a hint of wood afterward." ]
+
+        let item = Item()
+        item.rating = Double(arc4random_uniform(100)) * 0.01
+        item.ratingDate = NSDate()
+        item.name = names[Int(arc4random_uniform(UInt32(names.count-1)))]
+        item.comments = comments[Int(arc4random_uniform(UInt32(comments.count-1)))]
+
+        realm.beginWriteTransaction()
+        realm.addObject(item)
+        realm.commitWriteTransaction()
     }
 
     // MARK: - Segues
@@ -61,7 +72,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showDetail" {
             if let indexPath = self.tableView.indexPathForSelectedRow() {
-            let object = self.fetchedResultsController.objectAtIndexPath(indexPath) as Item
+                let object = items[indexPath.row]
                 let controller = (segue.destinationViewController as UINavigationController).topViewController as DetailViewController
                 controller.item = object
                 controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
@@ -72,13 +83,8 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
 
     // MARK: - Table View
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return self.fetchedResultsController.sections?.count ?? 0
-    }
-
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let sectionInfo = self.fetchedResultsController.sections![section] as NSFetchedResultsSectionInfo
-        return sectionInfo.numberOfObjects
+        return items.count
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -94,109 +100,18 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
 
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
-            let context = self.fetchedResultsController.managedObjectContext
-            context.deleteObject(self.fetchedResultsController.objectAtIndexPath(indexPath) as NSManagedObject)
-                
-            var error: NSError? = nil
-            if !context.save(&error) {
-                // Replace this implementation with code to handle the error appropriately.
-                // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                //println("Unresolved error \(error), \(error.userInfo)")
-                abort()
-            }
+            let item = items[indexPath.row]
+            realm.beginWriteTransaction()
+            realm.deleteObject(item)
+            realm.commitWriteTransaction()
         }
     }
 
     func configureCell(cell: ItemTableViewCell, atIndexPath indexPath: NSIndexPath) {
-        if let item: Item = self.fetchedResultsController.objectAtIndexPath(indexPath) as? Item {
-            cell.itemImageView.image = item.image
-            cell.nameLabel.text = item.name
-            cell.ratingView.value = item.rating
-        }
+        let item = items[indexPath.row]
+        cell.itemImageView.image = item.image
+        cell.nameLabel.text = item.name
+        cell.ratingView.value = Float(item.rating)
     }
-
-    // MARK: - Fetched results controller
-
-    var fetchedResultsController: NSFetchedResultsController {
-        if _fetchedResultsController != nil {
-            return _fetchedResultsController!
-        }
-        
-        let fetchRequest = NSFetchRequest()
-        // Edit the entity name as appropriate.
-        let entity = NSEntityDescription.entityForName(Item.entityName(), inManagedObjectContext: self.managedObjectContext!)
-        fetchRequest.entity = entity
-        
-        // Set the batch size to a suitable number.
-        fetchRequest.fetchBatchSize = 20
-        
-        // Edit the sort key as appropriate.
-        let sortDescriptor = NSSortDescriptor(key: "ratingDate", ascending: false)
-        let sortDescriptors = [sortDescriptor]
-        
-        fetchRequest.sortDescriptors = [sortDescriptor]
-        
-        // Edit the section name key path and cache name if appropriate.
-        // nil for section name key path means "no sections".
-        let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext!, sectionNameKeyPath: nil, cacheName: "Master")
-        aFetchedResultsController.delegate = self
-        _fetchedResultsController = aFetchedResultsController
-        
-    	var error: NSError? = nil
-    	if !_fetchedResultsController!.performFetch(&error) {
-    	     // Replace this implementation with code to handle the error appropriately.
-    	     // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. 
-             //println("Unresolved error \(error), \(error.userInfo)")
-    	     abort()
-    	}
-        
-        return _fetchedResultsController!
-    }    
-    var _fetchedResultsController: NSFetchedResultsController? = nil
-
-    func controllerWillChangeContent(controller: NSFetchedResultsController) {
-        self.tableView.beginUpdates()
-    }
-
-    func controller(controller: NSFetchedResultsController, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
-        switch type {
-            case .Insert:
-                self.tableView.insertSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
-            case .Delete:
-                self.tableView.deleteSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
-            default:
-                return
-        }
-    }
-
-    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
-        switch type {
-            case .Insert:
-                tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
-            case .Delete:
-                tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
-            case .Update:
-                self.configureCell(tableView.cellForRowAtIndexPath(indexPath!) as ItemTableViewCell, atIndexPath: indexPath!)
-            case .Move:
-                tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
-                tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
-            default:
-                return
-        }
-    }
-
-    func controllerDidChangeContent(controller: NSFetchedResultsController) {
-        self.tableView.endUpdates()
-    }
-
-    /*
-     // Implementing the above methods to update the table view in response to individual changes may have performance implications if a large number of changes are made simultaneously. If this proves to be an issue, you can instead just implement controllerDidChangeContent: which notifies the delegate that all section and object changes have been processed.
-     
-     func controllerDidChangeContent(controller: NSFetchedResultsController) {
-         // In the simplest, most efficient, case, reload the table view.
-         self.tableView.reloadData()
-     }
-     */
 
 }
-

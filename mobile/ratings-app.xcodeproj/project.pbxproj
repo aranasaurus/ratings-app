@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		946073881A759FD50057866D /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946073871A759FD50057866D /* DataStore.swift */; };
+		9410F13F1A8F41A600E05AAB /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 946776431A8F3E7B00A00790 /* Realm.framework */; };
+		946776461A8F3E9100A00790 /* RLMSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946776451A8F3E9100A00790 /* RLMSupport.swift */; };
+		9467764A1A8F3F5100A00790 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 946776491A8F3F5100A00790 /* libc++.dylib */; };
 		94907D341A757A8A0057A724 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94907D331A757A8A0057A724 /* AppDelegate.swift */; };
-		94907D371A757A8A0057A724 /* ratings_app.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 94907D351A757A8A0057A724 /* ratings_app.xcdatamodeld */; };
 		94907D391A757A8A0057A724 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94907D381A757A8A0057A724 /* MasterViewController.swift */; };
 		94907D3B1A757A8A0057A724 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94907D3A1A757A8A0057A724 /* DetailViewController.swift */; };
 		94907D3E1A757A8A0057A724 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94907D3C1A757A8A0057A724 /* Main.storyboard */; };
@@ -32,11 +33,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		946073871A759FD50057866D /* DataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataStore.swift; path = Model/DataStore.swift; sourceTree = "<group>"; };
+		946776431A8F3E7B00A00790 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = ext/Realm.framework; sourceTree = "<group>"; };
+		946776451A8F3E9100A00790 /* RLMSupport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RLMSupport.swift; path = ext/RLMSupport.swift; sourceTree = "<group>"; };
+		946776491A8F3F5100A00790 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		94907D2E1A757A8A0057A724 /* ratings-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ratings-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		94907D321A757A8A0057A724 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		94907D331A757A8A0057A724 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		94907D361A757A8A0057A724 /* ratings_app.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ratings_app.xcdatamodel; sourceTree = "<group>"; };
 		94907D381A757A8A0057A724 /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
 		94907D3A1A757A8A0057A724 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		94907D3D1A757A8A0057A724 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -55,6 +57,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9467764A1A8F3F5100A00790 /* libc++.dylib in Frameworks */,
+				9410F13F1A8F41A600E05AAB /* Realm.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,6 +72,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9410F1401A8F42DC00E05AAB /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				94907D381A757A8A0057A724 /* MasterViewController.swift */,
+				94907D3A1A757A8A0057A724 /* DetailViewController.swift */,
+				94907D3C1A757A8A0057A724 /* Main.storyboard */,
+				94F81B6B1A75C4D100DA6AC0 /* ItemTableViewCell.swift */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
+		946776471A8F3E9A00A00790 /* ext */ = {
+			isa = PBXGroup;
+			children = (
+				946776481A8F3EB500A00790 /* Realm */,
+			);
+			name = ext;
+			sourceTree = "<group>";
+		};
+		946776481A8F3EB500A00790 /* Realm */ = {
+			isa = PBXGroup;
+			children = (
+				946776451A8F3E9100A00790 /* RLMSupport.swift */,
+				946776491A8F3F5100A00790 /* libc++.dylib */,
+				946776431A8F3E7B00A00790 /* Realm.framework */,
+			);
+			name = Realm;
+			sourceTree = "<group>";
+		};
 		94907D251A757A8A0057A724 = {
 			isa = PBXGroup;
 			children = (
@@ -89,15 +122,10 @@
 		94907D301A757A8A0057A724 /* ratings-app */ = {
 			isa = PBXGroup;
 			children = (
+				946776471A8F3E9A00A00790 /* ext */,
 				94F81B641A75A99400DA6AC0 /* Model */,
+				9410F1401A8F42DC00E05AAB /* UI */,
 				94907D331A757A8A0057A724 /* AppDelegate.swift */,
-				94907D381A757A8A0057A724 /* MasterViewController.swift */,
-				94907D3A1A757A8A0057A724 /* DetailViewController.swift */,
-				94907D3C1A757A8A0057A724 /* Main.storyboard */,
-				94F81B6B1A75C4D100DA6AC0 /* ItemTableViewCell.swift */,
-				94907D3F1A757A8A0057A724 /* Images.xcassets */,
-				94907D411A757A8A0057A724 /* LaunchScreen.xib */,
-				94907D351A757A8A0057A724 /* ratings_app.xcdatamodeld */,
 				94907D311A757A8A0057A724 /* Supporting Files */,
 			);
 			path = "ratings-app";
@@ -106,6 +134,8 @@
 		94907D311A757A8A0057A724 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				94907D3F1A757A8A0057A724 /* Images.xcassets */,
+				94907D411A757A8A0057A724 /* LaunchScreen.xib */,
 				94907D321A757A8A0057A724 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -133,7 +163,6 @@
 			children = (
 				94F81B691A75B94200DA6AC0 /* Tag.swift */,
 				94F81B671A75B94200DA6AC0 /* Item.swift */,
-				946073871A759FD50057866D /* DataStore.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -238,12 +267,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				94907D371A757A8A0057A724 /* ratings_app.xcdatamodeld in Sources */,
 				94907D341A757A8A0057A724 /* AppDelegate.swift in Sources */,
 				94907D391A757A8A0057A724 /* MasterViewController.swift in Sources */,
+				946776461A8F3E9100A00790 /* RLMSupport.swift in Sources */,
 				94F81B6A1A75B94200DA6AC0 /* Tag.swift in Sources */,
 				94F81B6C1A75C4D100DA6AC0 /* ItemTableViewCell.swift in Sources */,
-				946073881A759FD50057866D /* DataStore.swift in Sources */,
 				94F81B681A75B94200DA6AC0 /* Item.swift in Sources */,
 				94907D3B1A757A8A0057A724 /* DetailViewController.swift in Sources */,
 			);
@@ -370,6 +398,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ratings-app",
+					"$(PROJECT_DIR)/ratings-app/ext",
+				);
 				INFOPLIST_FILE = "ratings-app/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -380,6 +413,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ratings-app",
+					"$(PROJECT_DIR)/ratings-app/ext",
+				);
 				INFOPLIST_FILE = "ratings-app/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -451,19 +489,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		94907D351A757A8A0057A724 /* ratings_app.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				94907D361A757A8A0057A724 /* ratings_app.xcdatamodel */,
-			);
-			currentVersion = 94907D361A757A8A0057A724 /* ratings_app.xcdatamodel */;
-			path = ratings_app.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 94907D261A757A8A0057A724 /* Project object */;
 }

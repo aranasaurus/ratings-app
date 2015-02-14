@@ -7,14 +7,12 @@
 //
 
 import UIKit
-import CoreData
+import Realm
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate {
 
     var window: UIWindow?
-    var dataStore: DataStore?
-
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
@@ -25,9 +23,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 
         let masterNavigationController = splitViewController.viewControllers[0] as UINavigationController
         let controller = masterNavigationController.topViewController as MasterViewController
-        let modelURL = NSBundle.mainBundle().URLForResource("ratings_app", withExtension: "momd")!
-        let storeURL = self.applicationDocumentsDirectory.URLByAppendingPathComponent("ratings_app.sqlite")
-        controller.dataStore = DataStore(storeURL: storeURL, modelURL: modelURL)
+
+        RLMRealm.setSchemaVersion(1, forRealmAtPath: RLMRealm.defaultRealmPath(),
+            withMigrationBlock: { migration, oldSchemaVersion in
+                if oldSchemaVersion < 1 {
+                    migration.enumerateObjects(Item.className()) { oldObject, newObject in
+                        newObject["rating"] = Double(oldObject["rating"] as Float)
+                    }
+                }
+        })
         return true
     }
 
@@ -52,11 +56,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
-        if let ds = dataStore {
-            ds.saveContext()
-        } else {
-            println("No data store found. Terminating app without saving data.")
-        }
     }
 
     // MARK: - Split view
@@ -72,12 +71,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         }
         return false
     }
-
-    lazy var applicationDocumentsDirectory: NSURL = {
-        // The directory the application uses to store the Core Data store file. This code uses a directory named "com.aranasaurus.ratings_app" in the application's documents Application Support directory.
-        let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
-        return urls[urls.count-1] as NSURL
-    }()
 
 }
 

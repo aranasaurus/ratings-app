@@ -7,14 +7,13 @@
 //
 
 import Foundation
-import CoreData
+import Realm
 
-class Tag: NSManagedObject {
+class Tag: RLMObject {
 
-    @NSManaged var name: String
-    @NSManaged var items: NSSet
-
-    class func entityName() -> String {
-        return "Tag"
+    dynamic var name = ""
+    var items: [Item] {
+        return linkingObjectsOfClass(Item.className(), forProperty: "tags") as [Item]
     }
+
 }

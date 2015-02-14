@@ -32,7 +32,7 @@ class DetailViewController: UIViewController {
             nameLabel.text = detail.name
             commentsTextView.text = detail.comments
             itemImageView.image = detail.image
-            ratingSlider.value = detail.rating
+            ratingSlider.value = Float(detail.rating)
             lastUpdatedLabel.text = detail.ratingDate.description
         }
     }

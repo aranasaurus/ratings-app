@@ -7,26 +7,33 @@
 //
 
 import Foundation
-import CoreData
 import UIKit
+import Realm
 
-class Item: NSManagedObject {
+extension RLMResults {
+    func arraySortedByProperty(propertyName: String!, ascending: Bool) -> [RLMObject] {
+        return map( self.sortedResultsUsingProperty(propertyName, ascending: ascending) ) { (r: RLMObject) -> RLMObject in
+            return r
+        }
+    }
+}
 
-    @NSManaged var imageData: NSData
-    @NSManaged var rating: Float
-    @NSManaged var ratingDate: NSTimeInterval
-    @NSManaged var comments: String
-    @NSManaged var name: String
-    @NSManaged var tags: NSSet
+class Item: RLMObject {
+
+    dynamic var imagePath = "default.png"
+    dynamic var rating: Double = 0
+    dynamic var ratingDate = NSDate()
+    dynamic var comments = ""
+    dynamic var name = ""
+    dynamic var tags = RLMArray(objectClassName: Tag.className())
 
     var image: UIImage? {
         get {
-            return UIImage(data: imageData)
+            if let img = UIImage(contentsOfFile: imagePath) {
+                return img
+            }
+            return UIImage(named: "default.png")
         }
-    }
-
-    class func entityName() -> String {
-        return "Item"
     }
 
 }

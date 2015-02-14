@@ -100,6 +100,9 @@
                                 <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
                                     <rect key="frame" x="14" y="397" width="372" height="31"/>
                                 </variation>
+                                <connections>
+                                    <action selector="ratingChanged:" destination="JEX-9P-axG" eventType="valueChanged" id="H8L-mV-ltz"/>
+                                </connections>
                             </slider>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Last Updated: 01/25/2015" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tQq-9p-NFt" userLabel="Last Updated Label">
                                 <rect key="frame" x="324" y="570" width="260" height="15"/>
@@ -266,8 +269,11 @@
                                                 <fontDescription key="fontDescription" name="Optima-Bold" family="Optima" pointSize="19"/>
                                             </variation>
                                         </label>
-                                        <slider opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="qks-VT-r3F">
+                                        <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" continuous="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qks-VT-r3F">
                                             <rect key="frame" x="92" y="74" width="469" height="31"/>
+                                            <connections>
+                                                <action selector="ratingChange:" destination="WCw-Qf-5nD" eventType="valueChanged" id="ajW-VZ-cFG"/>
+                                            </connections>
                                         </slider>
                                     </subviews>
                                     <constraints>

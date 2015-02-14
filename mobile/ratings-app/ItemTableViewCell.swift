@@ -14,6 +14,14 @@ class ItemTableViewCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var ratingView: UISlider!
 
+    var item: Item = Item() {
+        didSet {
+            itemImageView.image = item.image
+            nameLabel.text = item.name
+            ratingView.value = Float(item.rating)
+        }
+    }
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -25,4 +33,11 @@ class ItemTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    @IBAction func ratingChange(sender: UISlider) {
+        if let realm = item.realm {
+            realm.beginWriteTransaction()
+            item.rating = sender.value
+            realm.commitWriteTransaction()
+        }
+    }
 }

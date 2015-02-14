@@ -75,10 +75,9 @@
 		9410F1401A8F42DC00E05AAB /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				94907D381A757A8A0057A724 /* MasterViewController.swift */,
-				94907D3A1A757A8A0057A724 /* DetailViewController.swift */,
-				94907D3C1A757A8A0057A724 /* Main.storyboard */,
+				94A5FA831A8FC8B500AC38C7 /* Controllers */,
 				94F81B6B1A75C4D100DA6AC0 /* ItemTableViewCell.swift */,
+				94907D3C1A757A8A0057A724 /* Main.storyboard */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -156,6 +155,15 @@
 				94907D4D1A757A8A0057A724 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		94A5FA831A8FC8B500AC38C7 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				94907D381A757A8A0057A724 /* MasterViewController.swift */,
+				94907D3A1A757A8A0057A724 /* DetailViewController.swift */,
+			);
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 		94F81B641A75A99400DA6AC0 /* Model */ = {

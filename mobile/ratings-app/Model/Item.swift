@@ -21,7 +21,7 @@ extension RLMResults {
 class Item: RLMObject {
 
     dynamic var imagePath = "default.png"
-    dynamic var rating: Double = 0
+    dynamic var rating: Float = 0
     dynamic var ratingDate = NSDate()
     dynamic var comments = ""
     dynamic var name = ""

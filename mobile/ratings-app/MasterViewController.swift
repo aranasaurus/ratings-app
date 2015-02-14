@@ -57,7 +57,7 @@ class MasterViewController: UITableViewController {
         let comments = [ "Delicious.", "Yummy!", "HUGE!", "Amazing", "Room for improvement.", "LOVE!", "meh.", "Dark, with a hint of wood afterward." ]
 
         let item = Item()
-        item.rating = Double(arc4random_uniform(100)) * 0.01
+        item.rating = Float(arc4random_uniform(100)) * 0.01
         item.ratingDate = NSDate()
         item.name = names[Int(arc4random_uniform(UInt32(names.count-1)))]
         item.comments = comments[Int(arc4random_uniform(UInt32(comments.count-1)))]
@@ -89,7 +89,7 @@ class MasterViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("ItemCell", forIndexPath: indexPath) as ItemTableViewCell
-        configureCell(cell, atIndexPath: indexPath)
+        cell.item = items[indexPath.row]
         return cell
     }
 
@@ -107,11 +107,5 @@ class MasterViewController: UITableViewController {
         }
     }
 
-    func configureCell(cell: ItemTableViewCell, atIndexPath indexPath: NSIndexPath) {
-        let item = items[indexPath.row]
-        cell.itemImageView.image = item.image
-        cell.nameLabel.text = item.name
-        cell.ratingView.value = Float(item.rating)
-    }
 
 }

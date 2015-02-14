@@ -24,11 +24,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         let masterNavigationController = splitViewController.viewControllers[0] as UINavigationController
         let controller = masterNavigationController.topViewController as MasterViewController
 
-        RLMRealm.setSchemaVersion(1, forRealmAtPath: RLMRealm.defaultRealmPath(),
+        RLMRealm.setSchemaVersion(2, forRealmAtPath: RLMRealm.defaultRealmPath(),
             withMigrationBlock: { migration, oldSchemaVersion in
-                if oldSchemaVersion < 1 {
+                if oldSchemaVersion == 1 {
                     migration.enumerateObjects(Item.className()) { oldObject, newObject in
-                        newObject["rating"] = Double(oldObject["rating"] as Float)
+                        newObject["rating"] = Float(oldObject["rating"] as Double)
                     }
                 }
         })

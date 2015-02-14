@@ -16,7 +16,7 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var ratingSlider: UISlider!
     @IBOutlet weak var lastUpdatedLabel: UILabel!
 
-    var item: Item? {
+    var item: Item? = nil {
         didSet {
             // Update the view.
             self.configureView()
@@ -25,14 +25,14 @@ class DetailViewController: UIViewController {
 
     func configureView() {
         // Update the user interface for the detail item.
-        if let detail = self.item {
-            if nameLabel == nil {
-                return
-            }
+        if nameLabel == nil {
+            return
+        }
+        if let detail = item {
             nameLabel.text = detail.name
             commentsTextView.text = detail.comments
             itemImageView.image = detail.image
-            ratingSlider.value = Float(detail.rating)
+            ratingSlider.value = detail.rating
             lastUpdatedLabel.text = detail.ratingDate.description
         }
     }
@@ -48,11 +48,13 @@ class DetailViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    override func traitCollectionDidChange(previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-        println("\(traitCollection.horizontalSizeClass.rawValue), \(traitCollection.verticalSizeClass.rawValue)")
+    @IBAction func ratingChanged(sender: UISlider) {
+        if let realm = item?.realm {
+            realm.beginWriteTransaction()
+            item!.rating = sender.value
+            realm.commitWriteTransaction()
+        }
     }
-
 
 }
 

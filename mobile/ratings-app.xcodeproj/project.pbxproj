@@ -40,18 +40,18 @@
 		94907D2E1A757A8A0057A724 /* ratings-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ratings-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		94907D321A757A8A0057A724 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		94907D331A757A8A0057A724 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		94907D381A757A8A0057A724 /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
-		94907D3A1A757A8A0057A724 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		94907D381A757A8A0057A724 /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MasterViewController.swift; path = UI/MasterViewController.swift; sourceTree = "<group>"; };
+		94907D3A1A757A8A0057A724 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DetailViewController.swift; path = UI/DetailViewController.swift; sourceTree = "<group>"; };
 		94907D3D1A757A8A0057A724 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		94907D3F1A757A8A0057A724 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		94907D421A757A8A0057A724 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		94907D481A757A8A0057A724 /* ratings-appTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ratings-appTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		94907D4D1A757A8A0057A724 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		94907D4E1A757A8A0057A724 /* ratings_appTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ratings_appTests.swift; sourceTree = "<group>"; };
-		94A5FA841A90862700AC38C7 /* RealmExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RealmExtensions.swift; path = Model/RealmExtensions.swift; sourceTree = "<group>"; };
-		94F81B671A75B94200DA6AC0 /* Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Item.swift; path = Model/Item.swift; sourceTree = "<group>"; };
-		94F81B691A75B94200DA6AC0 /* Tag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Tag.swift; path = Model/Tag.swift; sourceTree = "<group>"; };
-		94F81B6B1A75C4D100DA6AC0 /* ItemTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemTableViewCell.swift; sourceTree = "<group>"; };
+		94A5FA841A90862700AC38C7 /* RealmExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RealmExtensions.swift; path = Data/RealmExtensions.swift; sourceTree = "<group>"; };
+		94F81B671A75B94200DA6AC0 /* Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Item.swift; path = Data/Item.swift; sourceTree = "<group>"; };
+		94F81B691A75B94200DA6AC0 /* Tag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Tag.swift; path = Data/Tag.swift; sourceTree = "<group>"; };
+		94F81B6B1A75C4D100DA6AC0 /* ItemTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ItemTableViewCell.swift; path = UI/ItemTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */

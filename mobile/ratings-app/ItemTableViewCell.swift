@@ -18,7 +18,7 @@ class ItemTableViewCell: UITableViewCell {
         didSet {
             itemImageView.image = item.image
             nameLabel.text = item.name
-            ratingView.value = Float(item.rating)
+            ratingView.value = item.rating
         }
     }
 
@@ -34,10 +34,7 @@ class ItemTableViewCell: UITableViewCell {
     }
 
     @IBAction func ratingChange(sender: UISlider) {
-        if let realm = item.realm {
-            realm.beginWriteTransaction()
-            item.rating = sender.value
-            realm.commitWriteTransaction()
-        }
+        item.updateRating(sender.value)
     }
+
 }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Realm
 
 class DetailViewController: UIViewController {
 
@@ -16,6 +17,7 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var ratingSlider: UISlider!
     @IBOutlet weak var lastUpdatedLabel: UILabel!
 
+    var token: RLMNotificationToken = RLMNotificationToken()
     var item: Item? = nil {
         didSet {
             // Update the view.
@@ -41,6 +43,12 @@ class DetailViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.configureView()
+
+        token = Item.addNotificationBlock { (notification: String!, rlm: RLMRealm!) in
+            if notification == RLMRealmDidChangeNotification {
+                self.configureView()
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -49,11 +57,7 @@ class DetailViewController: UIViewController {
     }
 
     @IBAction func ratingChanged(sender: UISlider) {
-        if let realm = item?.realm {
-            realm.beginWriteTransaction()
-            item!.rating = sender.value
-            realm.commitWriteTransaction()
-        }
+        item?.updateRating(sender.value)
     }
 
 }

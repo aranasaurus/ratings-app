@@ -10,16 +10,13 @@ import Foundation
 import UIKit
 import Realm
 
-extension RLMResults {
-    func arraySortedByProperty(propertyName: String!, ascending: Bool) -> [RLMObject] {
-        return map( self.sortedResultsUsingProperty(propertyName, ascending: ascending) ) { (r: RLMObject) -> RLMObject in
-            return r
-        }
-    }
-}
-
 class Item: RLMObject {
 
+    override class func primaryKey() -> String {
+        return "guid"
+    }
+
+    dynamic var guid = NSUUID().UUIDString
     dynamic var imagePath = "default.png"
     dynamic var rating: Float = 0
     dynamic var ratingDate = NSDate()
@@ -33,6 +30,19 @@ class Item: RLMObject {
                 return img
             }
             return UIImage(named: "default.png")
+        }
+    }
+
+    func updateRating(rating: Float) {
+        if let r = realm {
+            realm.beginWriteTransaction()
+        }
+
+        self.rating = rating
+        ratingDate = NSDate()
+
+        if let r = realm {
+            realm.commitWriteTransaction()
         }
     }
 

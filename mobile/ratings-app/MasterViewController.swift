@@ -13,9 +13,6 @@ class MasterViewController: UITableViewController {
 
     var detailViewController: DetailViewController? = nil
 
-    var realm: RLMRealm {
-        return RLMRealm.defaultRealm()
-    }
     var token: RLMNotificationToken = RLMNotificationToken()
     var items: [Item] {
         return Item.allObjects().arraySortedByProperty("ratingDate", ascending: false) as [Item]
@@ -40,7 +37,7 @@ class MasterViewController: UITableViewController {
             self.detailViewController = controllers[controllers.count-1].topViewController as? DetailViewController
         }
 
-        token = realm.addNotificationBlock { (notification: String!, rlm: RLMRealm!) in
+        token = Item.addNotificationBlock { (notification: String!, rlm: RLMRealm!) in
             if notification == RLMRealmDidChangeNotification {
                 self.tableView.reloadData()
             }
@@ -59,12 +56,11 @@ class MasterViewController: UITableViewController {
         let item = Item()
         item.rating = Float(arc4random_uniform(100)) * 0.01
         item.ratingDate = NSDate()
-        item.name = names[Int(arc4random_uniform(UInt32(names.count-1)))]
+        let r = Int(arc4random_uniform(UInt32(names.count)))
+        println(r)
+        item.name = names[r]
         item.comments = comments[Int(arc4random_uniform(UInt32(comments.count-1)))]
-
-        realm.beginWriteTransaction()
-        realm.addObject(item)
-        realm.commitWriteTransaction()
+        item.save()
     }
 
     // MARK: - Segues
@@ -100,12 +96,8 @@ class MasterViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
-            let item = items[indexPath.row]
-            realm.beginWriteTransaction()
-            realm.deleteObject(item)
-            realm.commitWriteTransaction()
+            items[indexPath.row].delete()
         }
     }
-
 
 }

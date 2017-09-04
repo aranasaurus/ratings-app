@@ -18,11 +18,17 @@ final class AppCoordinator {
     }
 
     func start(in window: UIWindow) {
-        navigationController.addChildViewController(ViewController(colors: colors))
         navigationController.navigationBar.backgroundColor = colors.background
         navigationController.navigationBar.barTintColor = colors.background
         navigationController.navigationBar.tintColor = colors.highlight
         navigationController.isNavigationBarHidden = true
+
+        // TODO: Get get this from the data layer... after you've created one of those.
+        let items = [Item(id: "1", title: "Thing 1"), Item(id: "2", title: "Thing 2")]
+        let itemsVM = ItemsListViewModel(items: items.map(ItemCellViewModel.init(item:)))
+        let itemsVC = ItemsListViewController(viewModel: itemsVM, colors: colors)
+        navigationController.pushViewController(itemsVC, animated: false)
+
         window.rootViewController = navigationController
         self.window = window
         window.makeKeyAndVisible()

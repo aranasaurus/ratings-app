@@ -9,18 +9,30 @@
 import UIKit
 
 class ViewController: UIViewController {
+    private let colors: Colors
+
+    init(colors: Colors) {
+        self.colors = colors
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = UIColor(named: "BackgroundColor")
+        title = "LikeLike"
+
+        view.backgroundColor = colors.background
         let label = UILabel()
         view.addSubview(label)
 
         label.text = "💖 I LikeLike you! 💖"
         label.textAlignment = .center
         label.font = UIFont(name: "Baskerville", size: 32)
-        label.textColor = UIColor(named: "HighlightColor")
+        label.textColor = colors.highlight
         label.translatesAutoresizingMaskIntoConstraints = false
 
         let safeArea = view.safeAreaLayoutGuide
@@ -29,12 +41,4 @@ class ViewController: UIViewController {
         label.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor).isActive = true
         label.topAnchor.constraint(equalTo: safeArea.topAnchor).isActive = true
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-
 }
-

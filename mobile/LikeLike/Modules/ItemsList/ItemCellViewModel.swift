@@ -12,7 +12,7 @@ final class ItemCellViewModel {
     private let item: Item
 
     var title: String { return item.title }
-    var rating: String { return "\(item.rating)" }
+    var rating: String { return String(format: "%0.0f stars", item.rating) }
 
     init(item: Item) {
         self.item = item

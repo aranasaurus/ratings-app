@@ -24,7 +24,7 @@ final class AppCoordinator {
         navigationController.isNavigationBarHidden = true
 
         // TODO: Get get this from the data layer... after you've created one of those.
-        let items = [Item(id: "1", title: "Thing 1"), Item(id: "2", title: "Thing 2")]
+        let items = [Item(id: "1", title: "Thing 1", rating: 5), Item(id: "2", title: "Thing 2", rating: 4)]
         let itemsVM = ItemsListViewModel(items: items.map(ItemCellViewModel.init(item:)))
         let itemsVC = ItemsListViewController(viewModel: itemsVM, colors: colors)
         navigationController.pushViewController(itemsVC, animated: false)

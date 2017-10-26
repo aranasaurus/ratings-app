@@ -33,10 +33,11 @@ class ItemsListViewController: UIViewController {
         view.addSubview(tableView)
 
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        let guide = view.safeAreaLayoutGuide
+        tableView.topAnchor.constraint(equalTo: guide.topAnchor).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: guide.bottomAnchor).isActive = true
+        tableView.leadingAnchor.constraint(equalTo: guide.leadingAnchor).isActive = true
+        tableView.trailingAnchor.constraint(equalTo: guide.trailingAnchor).isActive = true
         tableView.backgroundColor = colors.background
 
         tableView.register(cells: viewModel.cells)
@@ -52,6 +53,7 @@ extension ItemsListViewController: UITableViewDataSource {
         let cell = viewModel.dataSet[indexPath.row].dequeue(from: tableView, at: indexPath)
         cell.backgroundColor = colors.background
         cell.textLabel?.textColor = colors.foreground
+        cell.detailTextLabel?.textColor = colors.subtitle
         return cell
     }
 }

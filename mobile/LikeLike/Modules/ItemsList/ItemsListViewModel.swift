@@ -9,7 +9,7 @@
 import UIKit
 
 final class ItemsListViewModel {
-    let cells: [TableViewCellViewModel.Type] = [ItemCellViewModel.self]
+    static let cellTypes: [TableViewCellViewModel.Type] = [ItemCellViewModel.self]
     private(set) var dataSet: [ItemCellViewModel] = []
 
     init(items: [ItemCellViewModel]) {

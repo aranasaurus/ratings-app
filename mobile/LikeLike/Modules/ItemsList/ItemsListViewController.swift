@@ -8,10 +8,16 @@
 
 import UIKit
 
+// TODO: Add New Item functionality
+// TODO: Add sort functionality
+// TODO: Add date added?
+// TODO: Put these TODOs in github issues :P
+
 class ItemsListViewController: UIViewController {
+    var viewModel: ItemsListViewModel
+
     private let colors: Colors
     private let tableView: UITableView
-    var viewModel: ItemsListViewModel
 
     init(viewModel: ItemsListViewModel, colors: Colors) {
         self.viewModel = viewModel
@@ -40,8 +46,16 @@ class ItemsListViewController: UIViewController {
         tableView.trailingAnchor.constraint(equalTo: guide.trailingAnchor).isActive = true
         tableView.backgroundColor = colors.background
 
-        tableView.register(cells: ItemsListViewModel.cellTypes)
+        tableView.register(ItemCell.self, forCellReuseIdentifier: "ItemCell")
         tableView.dataSource = self
+        tableView.delegate = self
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        for path in tableView.indexPathsForSelectedRows ?? [] {
+            tableView.deselectRow(at: path, animated: false)
+        }
     }
 }
 
@@ -49,11 +63,17 @@ extension ItemsListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.dataSet.count
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = viewModel.dataSet[indexPath.row].dequeue(from: tableView, at: indexPath)
-        cell.backgroundColor = colors.background
-        cell.textLabel?.textColor = colors.foreground
-        cell.detailTextLabel?.textColor = colors.subtitle
+        let item = viewModel.dataSet[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ItemCell", for: indexPath) as! ItemCell
+        cell.configure(with: item, colors: colors)
         return cell
+    }
+}
+
+extension ItemsListViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        viewModel.dataSet[indexPath.row].selected()
     }
 }

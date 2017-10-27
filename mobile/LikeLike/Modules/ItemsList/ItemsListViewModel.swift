@@ -9,10 +9,12 @@
 import UIKit
 
 final class ItemsListViewModel {
-    static let cellTypes: [TableViewCellViewModel.Type] = [ItemCellViewModel.self]
     private(set) var dataSet: [ItemCellViewModel] = []
 
-    init(items: [ItemCellViewModel]) {
+    init(items: [ItemCellViewModel], itemSelected: ((ItemCellViewModel) -> Void)?) {
         self.dataSet = items
+        for item in items {
+            item.onSelected = itemSelected
+        }
     }
 }

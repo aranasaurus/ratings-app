@@ -12,12 +12,16 @@ final class Item {
     let id: String
     var title: String
     var rating: Double
-    var photoUrl: URL? = nil
+    var photoUrl: URL?
+    var comments: String?
+    var tags: [Tag]
 
-    init(id: String, title: String, rating: Double = 0, photoUrl: URL? = nil) {
+    init(id: String, title: String, rating: Double = 0, photoUrl: URL? = nil, comments: String? = nil, tags: [Tag] = []) {
         self.id = id
         self.title = title
         self.rating = rating
         self.photoUrl = photoUrl
+        self.comments = comments
+        self.tags = tags
     }
 }

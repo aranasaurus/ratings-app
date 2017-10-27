@@ -9,16 +9,18 @@
 import Foundation
 
 final class ItemCellViewModel {
-    private let item: Item
-
-    var title: String { return item.title }
-    var rating: String { return String(format: "%0.0f stars", item.rating) }
+    let id: String
+    let title: String
+    let rating: String
+    var onSelected: ((ItemCellViewModel) -> Void)?
 
     init(item: Item) {
-        self.item = item
+        id = item.id
+        title = item.title
+        rating = String(format: "%0.0f stars", item.rating)
     }
-}
 
-extension ItemCellViewModel: TableViewCellRepresentable {
-    typealias TableViewCell = ItemCell
+    func selected() {
+        onSelected?(self)
+    }
 }

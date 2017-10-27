@@ -18,10 +18,13 @@ final class ItemCell: UITableViewCell {
     }
 }
 
-extension ItemCell: ViewModelConfigurable {
-    typealias ViewModel = ItemCellViewModel
-    func configure(with viewModel: ItemCellViewModel) {
+extension ItemCell {
+    func configure(with viewModel: ItemCellViewModel, colors: Colors) {
         textLabel?.text = viewModel.title
         detailTextLabel?.text = viewModel.rating
+
+        backgroundColor = colors.background
+        textLabel?.textColor = colors.foreground
+        detailTextLabel?.textColor = colors.subtitle
     }
 }

@@ -12,7 +12,7 @@ final class ItemDetailsViewController: UIViewController {
     private let detailsView: ItemDetailsView
     private let colors: Colors
 
-    init(item: ItemDetailsViewModel, colors: Colors) {
+    init(item: Item, colors: Colors) {
         detailsView = ItemDetailsView(item: item, colors: colors)
         self.colors = colors
         super.init(nibName: nil, bundle: nil)

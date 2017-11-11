@@ -19,9 +19,9 @@ final class ItemCell: UITableViewCell {
 }
 
 extension ItemCell {
-    func configure(with viewModel: ItemCellViewModel, colors: Colors) {
-        textLabel?.text = viewModel.title
-        detailTextLabel?.text = viewModel.rating
+    func configure(with item: Item, colors: Colors) {
+        textLabel?.text = item.title
+        detailTextLabel?.text = String(format: "%0.0f stars", item.rating)
 
         backgroundColor = colors.background
         textLabel?.textColor = colors.foreground

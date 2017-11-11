@@ -29,8 +29,11 @@ final class AppCoordinator {
         navigationController.navigationBar.tintColor = colors.highlight
         navigationController.navigationBar.titleTextAttributes = [.foregroundColor: colors.highlight as Any]
 
-        let itemsVM = ItemsListViewModel(items: items.values.map { ItemCellViewModel(item: $0) }, itemSelected: showDetails)
-        let itemsVC = ItemsListViewController(viewModel: itemsVM, colors: colors)
+        let itemsVC = ItemsListViewController(
+            items: items.values.sorted { $0.title < $1.title },
+            colors: colors,
+            itemSelected: showDetails
+        )
         navigationController.pushViewController(itemsVC, animated: false)
 
         window.rootViewController = navigationController
@@ -38,11 +41,8 @@ final class AppCoordinator {
         window.makeKeyAndVisible()
     }
 
-    func showDetails(for cellItem: ItemCellViewModel) {
-        print(cellItem.id + " selected")
-        guard let item = items[cellItem.id] else { return }
-        let details = ItemDetailsViewModel(item: item)
-        let vc = ItemDetailsViewController(item: details, colors: colors)
+    func showDetails(for item: Item) {
+        let vc = ItemDetailsViewController(item: item, colors: colors)
         navigationController.pushViewController(vc, animated: true)
     }
 }

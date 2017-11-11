@@ -14,14 +14,17 @@ import UIKit
 // TODO: Put these TODOs in github issues :P
 
 class ItemsListViewController: UIViewController {
-    var viewModel: ItemsListViewModel
+    private var items: [Item] = []
 
     private let colors: Colors
     private let tableView: UITableView
 
-    init(viewModel: ItemsListViewModel, colors: Colors) {
-        self.viewModel = viewModel
+    var itemSelected: (Item) -> Void
+
+    init(items: [Item], colors: Colors, itemSelected: @escaping (Item) -> Void) {
+        self.items = items
         self.colors = colors
+        self.itemSelected = itemSelected
         self.tableView = UITableView(frame: .zero, style: .plain)
         super.init(nibName: nil, bundle: nil)
     }
@@ -40,10 +43,13 @@ class ItemsListViewController: UIViewController {
 
         tableView.translatesAutoresizingMaskIntoConstraints = false
         let guide = view.safeAreaLayoutGuide
-        tableView.topAnchor.constraint(equalTo: guide.topAnchor).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: guide.bottomAnchor).isActive = true
-        tableView.leadingAnchor.constraint(equalTo: guide.leadingAnchor).isActive = true
-        tableView.trailingAnchor.constraint(equalTo: guide.trailingAnchor).isActive = true
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: guide.topAnchor),
+            tableView.bottomAnchor.constraint(equalTo: guide.bottomAnchor),
+            tableView.leadingAnchor.constraint(equalTo: guide.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: guide.trailingAnchor)
+        ])
+
         tableView.backgroundColor = colors.background
 
         tableView.register(ItemCell.self, forCellReuseIdentifier: "ItemCell")
@@ -61,11 +67,11 @@ class ItemsListViewController: UIViewController {
 
 extension ItemsListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.dataSet.count
+        return items.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let item = viewModel.dataSet[indexPath.row]
+        let item = items[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "ItemCell", for: indexPath) as! ItemCell
         cell.configure(with: item, colors: colors)
         return cell
@@ -74,6 +80,6 @@ extension ItemsListViewController: UITableViewDataSource {
 
 extension ItemsListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        viewModel.dataSet[indexPath.row].selected()
+        itemSelected(items[indexPath.row])
     }
 }

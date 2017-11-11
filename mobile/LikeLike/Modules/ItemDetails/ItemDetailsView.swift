@@ -9,7 +9,7 @@
 import UIKit
 
 final class ItemDetailsView: UIView {
-    var item: ItemDetailsViewModel? {
+    var item: Item? {
         didSet {
             if let item = item {
                 configure(for: item)
@@ -27,7 +27,7 @@ final class ItemDetailsView: UIView {
     // TODO: Tag List
     private let stackView: UIStackView = UIStackView()
 
-    init(item: ItemDetailsViewModel?, colors: Colors) {
+    init(item: Item?, colors: Colors) {
         self.item = item
         self.colors = colors
         super.init(frame: .zero)
@@ -83,9 +83,9 @@ final class ItemDetailsView: UIView {
 
     // TODO: update fonts as needed for system preference and trait collection changes
 
-    private func configure(for item: ItemDetailsViewModel) {
+    private func configure(for item: Item) {
         title.text = item.title
-        rating.text = item.rating
-        imageView.image = item.image
+        rating.text = String(format: "%0.0f stars", item.rating)
+        imageView.image = UIImage(contentsOfFile: item.photoUrl?.absoluteString ?? "")
     }
 }

@@ -16,14 +16,12 @@ import UIKit
 class ItemsListViewController: UIViewController {
     private var items: [Item] = []
 
-    private let colors: Colors
     private let tableView: UITableView
 
     var itemSelected: (Item) -> Void
 
-    init(items: [Item], colors: Colors, itemSelected: @escaping (Item) -> Void) {
+    init(items: [Item], itemSelected: @escaping (Item) -> Void) {
         self.items = items
-        self.colors = colors
         self.itemSelected = itemSelected
         self.tableView = UITableView(frame: .zero, style: .plain)
         super.init(nibName: nil, bundle: nil)
@@ -38,7 +36,7 @@ class ItemsListViewController: UIViewController {
 
         title = "LikeLike"
 
-        view.backgroundColor = colors.background
+        view.backgroundColor = Colors.background
         view.addSubview(tableView)
 
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -50,7 +48,7 @@ class ItemsListViewController: UIViewController {
             tableView.trailingAnchor.constraint(equalTo: guide.trailingAnchor)
         ])
 
-        tableView.backgroundColor = colors.background
+        tableView.backgroundColor = Colors.background
 
         tableView.register(ItemCell.self, forCellReuseIdentifier: "ItemCell")
         tableView.dataSource = self
@@ -73,7 +71,7 @@ extension ItemsListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let item = items[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "ItemCell", for: indexPath) as! ItemCell
-        cell.configure(with: item, colors: colors)
+        cell.configure(with: item)
         return cell
     }
 }

@@ -11,6 +11,10 @@ import UIKit
 final class ItemCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
+
+        backgroundColor = Colors.background
+        textLabel?.textColor = Colors.foreground
+        detailTextLabel?.textColor = Colors.subtitle
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -19,12 +23,8 @@ final class ItemCell: UITableViewCell {
 }
 
 extension ItemCell {
-    func configure(with item: Item, colors: Colors) {
+    func configure(with item: Item) {
         textLabel?.text = item.title
         detailTextLabel?.text = String(format: "%0.0f stars", item.rating)
-
-        backgroundColor = colors.background
-        textLabel?.textColor = colors.foreground
-        detailTextLabel?.textColor = colors.subtitle
     }
 }

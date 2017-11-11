@@ -9,24 +9,9 @@
 import UIKit
 
 struct Colors {
-    let background: UIColor?
-    let foreground: UIColor?
-    let subtitle: UIColor?
-    let highlight: UIColor?
-
-    private init(background: UIColor?, foreground: UIColor?, subtitle: UIColor?, highlight: UIColor?) {
-        self.background = background
-        self.foreground = foreground
-        self.subtitle = subtitle
-        self.highlight = highlight
-    }
-
-    static var `default`: Colors {
-        return Colors(
-            background: UIColor(named: "BackgroundColor"),
-            foreground: UIColor(named: "ForegroundColor"),
-            subtitle: UIColor(named: "SubtitleColor"),
-            highlight: UIColor(named: "HighlightColor")
-        )
-    }
+    private init() { }
+    static let background: UIColor? = UIColor(named: "BackgroundColor")
+    static let foreground: UIColor? = UIColor(named: "ForegroundColor")
+    static let subtitle: UIColor? = UIColor(named: "SubtitleColor")
+    static let highlight: UIColor? = UIColor(named: "HighlightColor")
 }

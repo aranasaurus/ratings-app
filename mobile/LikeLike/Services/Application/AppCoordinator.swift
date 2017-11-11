@@ -10,7 +10,6 @@ import UIKit
 
 final class AppCoordinator {
     private let navigationController = UINavigationController()
-    private let colors: Colors
     private var window: UIWindow?
 
     // TODO: Get get this from the data layer... after you've created one of those.
@@ -19,19 +18,14 @@ final class AppCoordinator {
         "2": Item(id: "2", title: "Thing 2", rating: 4)
     ]
 
-    init(colors: Colors = Colors.default) {
-        self.colors = colors
-    }
-
     func start(in window: UIWindow) {
-        navigationController.navigationBar.backgroundColor = colors.background
-        navigationController.navigationBar.barTintColor = colors.background
-        navigationController.navigationBar.tintColor = colors.highlight
-        navigationController.navigationBar.titleTextAttributes = [.foregroundColor: colors.highlight as Any]
+        navigationController.navigationBar.backgroundColor = Colors.background
+        navigationController.navigationBar.barTintColor = Colors.background
+        navigationController.navigationBar.tintColor = Colors.highlight
+        navigationController.navigationBar.titleTextAttributes = [.foregroundColor: Colors.highlight as Any]
 
         let itemsVC = ItemsListViewController(
             items: items.values.sorted { $0.title < $1.title },
-            colors: colors,
             itemSelected: showDetails
         )
         navigationController.pushViewController(itemsVC, animated: false)
@@ -42,7 +36,7 @@ final class AppCoordinator {
     }
 
     func showDetails(for item: Item) {
-        let vc = ItemDetailsViewController(item: item, colors: colors)
+        let vc = ItemDetailsViewController(item: item)
         navigationController.pushViewController(vc, animated: true)
     }
 }

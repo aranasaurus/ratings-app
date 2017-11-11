@@ -10,11 +10,9 @@ import UIKit
 
 final class ItemDetailsViewController: UIViewController {
     private let detailsView: ItemDetailsView
-    private let colors: Colors
 
-    init(item: Item, colors: Colors) {
-        detailsView = ItemDetailsView(item: item, colors: colors)
-        self.colors = colors
+    init(item: Item) {
+        detailsView = ItemDetailsView(item: item)
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -27,9 +25,11 @@ final class ItemDetailsViewController: UIViewController {
 
         view.addSubview(detailsView)
         detailsView.translatesAutoresizingMaskIntoConstraints = false
-        detailsView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        detailsView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        detailsView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        detailsView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        NSLayoutConstraint.activate([
+            detailsView.topAnchor.constraint(equalTo: view.topAnchor),
+            detailsView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            detailsView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            detailsView.leftAnchor.constraint(equalTo: view.leftAnchor)
+        ])
     }
 }

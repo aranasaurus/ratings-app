@@ -18,7 +18,6 @@ final class ItemDetailsView: UIView {
             }
         }
     }
-    let colors: Colors
 
     private let title: UILabel = UILabel()
     private let rating: UILabel = UILabel()
@@ -27,9 +26,8 @@ final class ItemDetailsView: UIView {
     // TODO: Tag List
     private let stackView: UIStackView = UIStackView()
 
-    init(item: Item?, colors: Colors) {
+    init(item: Item?) {
         self.item = item
-        self.colors = colors
         super.init(frame: .zero)
 
         setupSubviews()
@@ -51,7 +49,7 @@ final class ItemDetailsView: UIView {
     }
 
     private func setupSubviews() {
-        backgroundColor = colors.background
+        backgroundColor = Colors.background
 
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
@@ -59,18 +57,21 @@ final class ItemDetailsView: UIView {
         stackView.isLayoutMarginsRelativeArrangement = true
         addSubview(stackView)
 
-        stackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 8).isActive = true
-        stackView.leadingAnchor.constraint(equalTo: readableContentGuide.leadingAnchor).isActive = true
-        stackView.trailingAnchor.constraint(equalTo: readableContentGuide.trailingAnchor).isActive = true
+        NSLayoutConstraint.activate([
+            stackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 8),
+            stackView.leadingAnchor.constraint(equalTo: readableContentGuide.leadingAnchor),
+            stackView.trailingAnchor.constraint(equalTo: readableContentGuide.trailingAnchor)
+        ])
 
-        title.textColor = colors.foreground
-        title.backgroundColor = colors.background
+
+        title.textColor = Colors.foreground
+        title.backgroundColor = Colors.background
         title.font = UIFont.preferredFont(forTextStyle: .largeTitle, compatibleWith: traitCollection)
         stackView.addArrangedSubview(title)
         stackView.setCustomSpacing(8, after: title)
 
-        rating.textColor = colors.subtitle
-        rating.backgroundColor = colors.background
+        rating.textColor = Colors.subtitle
+        rating.backgroundColor = Colors.background
         rating.font = UIFont.preferredFont(forTextStyle: .title1, compatibleWith: traitCollection)
         rating.textAlignment = .right
         stackView.addArrangedSubview(rating)

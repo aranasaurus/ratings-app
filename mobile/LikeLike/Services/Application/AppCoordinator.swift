@@ -25,7 +25,8 @@ final class AppCoordinator {
 
         let itemsVC = ItemsListViewController(
             dataSource: DataStoreItemDataSource(dataStore: dataStore),
-            itemSelected: showDetails
+            itemSelected: showDetails,
+            itemRemoved: remove
         )
         navigationController.pushViewController(itemsVC, animated: false)
 
@@ -36,7 +37,10 @@ final class AppCoordinator {
 
     func showDetails(for item: Item) {
         let vc = ItemDetailsViewController(item: item)
-
         navigationController.pushViewController(vc, animated: true)
+    }
+
+    func remove(item: Item) {
+        dataStore.remove(item: item)
     }
 }

@@ -19,10 +19,12 @@ class ItemsListViewController: UIViewController {
     private let tableView: UITableView
 
     var itemSelected: (Item) -> Void
+    var itemRemoved: (Item) -> Void
 
-    init(dataSource: ItemDataSource, itemSelected: @escaping (Item) -> Void) {
+    init(dataSource: ItemDataSource, itemSelected: @escaping (Item) -> Void, itemRemoved: @escaping (Item) -> Void) {
         self.dataSource = dataSource
         self.itemSelected = itemSelected
+        self.itemRemoved = itemRemoved
         self.tableView = UITableView(frame: .zero, style: .plain)
         super.init(nibName: nil, bundle: nil)
     }
@@ -60,6 +62,11 @@ class ItemsListViewController: UIViewController {
         for path in tableView.indexPathsForSelectedRows ?? [] {
             tableView.deselectRow(at: path, animated: false)
         }
+
+        reloadData()
+    }
+
+    func reloadData() {
         dataSource.reloadData()
         tableView.reloadData()
     }
@@ -75,6 +82,21 @@ extension ItemsListViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ItemCell", for: indexPath) as! ItemCell
         cell.configure(with: item)
         return cell
+    }
+
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let item = dataSource.item(at: indexPath)
+        let remove = UITableViewRowAction(style: .destructive, title: "Delete") { [unowned self] _, _ in
+            let alert = UIAlertController(title: "Confirm", message: "Are you sure you want to remove \(item.title)", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Remove", style: .destructive) { [unowned self] _ in
+                self.itemRemoved(item)
+                self.dataSource.reloadData()
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+            })
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
+        return [remove]
     }
 }
 

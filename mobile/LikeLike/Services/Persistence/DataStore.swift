@@ -11,6 +11,7 @@ import Foundation
 protocol DataStore {
     func getAllItems() -> [Item]
     func save(item: Item)
+    @discardableResult
     func remove(item: Item) -> Item?
     func getItem(id: String) -> Item?
 }

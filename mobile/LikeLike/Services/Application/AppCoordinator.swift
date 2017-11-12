@@ -15,6 +15,7 @@ final class AppCoordinator {
     private let dataStore: DataStore = FileStorage()
 
     func start(in window: UIWindow) {
+        navigationController.navigationBar.barStyle = .black
         navigationController.navigationBar.backgroundColor = Colors.background
         navigationController.navigationBar.barTintColor = Colors.background
         navigationController.navigationBar.tintColor = Colors.highlight

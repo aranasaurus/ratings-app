@@ -8,7 +8,9 @@
 
 import Foundation
 
-final class Item: Codable {
+struct Item: Codable {
+    static let defaultID: String = "__default__"
+
     let id: String
     var title: String
     var rating: Double
@@ -24,4 +26,9 @@ final class Item: Codable {
         self.comments = comments
         self.tags = tags
     }
+
+    init(title: String, rating: Double = 0) {
+        self.init(id: Item.defaultID, title: title, rating: rating)
+    }
 }
+

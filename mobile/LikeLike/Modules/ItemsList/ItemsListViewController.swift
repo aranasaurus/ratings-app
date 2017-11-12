@@ -17,14 +17,17 @@ class ItemsListViewController: UIViewController {
     var dataSource: ItemDataSource
 
     private let tableView: UITableView
+    private var actions: [TargetAction] = []
 
     var itemSelected: (Item) -> Void
     var itemRemoved: (Item) -> Void
+    var addItemTapped: () -> Void
 
-    init(dataSource: ItemDataSource, itemSelected: @escaping (Item) -> Void, itemRemoved: @escaping (Item) -> Void) {
+    init(dataSource: ItemDataSource, itemSelected: @escaping (Item) -> Void, itemRemoved: @escaping (Item) -> Void, addItemTapped: @escaping () -> Void) {
         self.dataSource = dataSource
         self.itemSelected = itemSelected
         self.itemRemoved = itemRemoved
+        self.addItemTapped = addItemTapped
         self.tableView = UITableView(frame: .zero, style: .plain)
         super.init(nibName: nil, bundle: nil)
     }
@@ -55,6 +58,29 @@ class ItemsListViewController: UIViewController {
         tableView.register(ItemCell.self, forCellReuseIdentifier: "ItemCell")
         tableView.dataSource = self
         tableView.delegate = self
+
+        let addButton = UIButton(type: .system)
+        addButton.translatesAutoresizingMaskIntoConstraints = false
+        addButton.backgroundColor = Colors.foreground.withAlphaComponent(0.88)
+        addButton.layer.cornerRadius = 8
+        var attr = Fonts.attributes(size: 36)
+        attr[.foregroundColor] = Colors.background
+        let shadow = Fonts.shadow()
+        shadow.shadowColor = Colors.lightBackground
+        attr[.shadow] = shadow
+        let buttonTitle = NSAttributedString(string: "Add", attributes: attr)
+        addButton.setAttributedTitle(buttonTitle, for: .normal)
+        let target = TargetAction { self.addItemTapped() }
+        actions.append(target)
+        addButton.addTarget(target, action: #selector(TargetAction.action), for: .touchUpInside)
+        view.addSubview(addButton)
+
+        let padding = CGFloat(64)
+        NSLayoutConstraint.activate([
+            addButton.bottomAnchor.constraint(equalTo: guide.bottomAnchor, constant: -14),
+            addButton.leftAnchor.constraint(equalTo: guide.leftAnchor, constant: padding),
+            addButton.rightAnchor.constraint(equalTo: guide.rightAnchor, constant: -padding)
+        ])
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -69,6 +95,18 @@ class ItemsListViewController: UIViewController {
     func reloadData() {
         dataSource.reloadData()
         tableView.reloadData()
+    }
+}
+
+final class TargetAction {
+    let handler: () -> Void
+
+    init(_ handler: @escaping () -> Void) {
+        self.handler = handler
+    }
+
+    @objc func action() {
+        handler()
     }
 }
 

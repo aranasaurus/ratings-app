@@ -27,7 +27,8 @@ final class AppCoordinator {
         let itemsVC = ItemsListViewController(
             dataSource: DataStoreItemDataSource(dataStore: dataStore),
             itemSelected: showDetails,
-            itemRemoved: remove
+            itemRemoved: remove,
+            addItemTapped: showCreateItemScene
         )
         navigationController.pushViewController(itemsVC, animated: false)
 
@@ -43,5 +44,16 @@ final class AppCoordinator {
 
     func remove(item: Item) {
         dataStore.remove(item: item)
+    }
+
+    func showCreateItemScene() {
+        let vc = CreateItemViewController(createItem: { item in
+            let created = self.dataStore.createItem(item: item)
+            self.dataStore.save(item: created)
+            self.navigationController.popViewController(animated: true)
+        })
+
+        vc.view.tintColor = Colors.highlight
+        navigationController.pushViewController(vc, animated: true)
     }
 }

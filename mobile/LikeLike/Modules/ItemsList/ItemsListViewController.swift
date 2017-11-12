@@ -48,7 +48,7 @@ class ItemsListViewController: UIViewController {
             tableView.trailingAnchor.constraint(equalTo: guide.trailingAnchor)
         ])
 
-        tableView.backgroundColor = Colors.background
+        tableView.backgroundColor = Colors.lightBackground
 
         tableView.register(ItemCell.self, forCellReuseIdentifier: "ItemCell")
         tableView.dataSource = self

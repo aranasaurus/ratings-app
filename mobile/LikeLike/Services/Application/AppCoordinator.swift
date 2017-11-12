@@ -22,7 +22,10 @@ final class AppCoordinator {
         navigationController.navigationBar.backgroundColor = Colors.background
         navigationController.navigationBar.barTintColor = Colors.background
         navigationController.navigationBar.tintColor = Colors.highlight
-        navigationController.navigationBar.titleTextAttributes = [.foregroundColor: Colors.highlight as Any]
+        navigationController.navigationBar.prefersLargeTitles = true
+
+        navigationController.navigationBar.largeTitleTextAttributes = Fonts.addShadow(to: Fonts.attributes(size: 57))
+        navigationController.navigationBar.titleTextAttributes = Fonts.addShadow(to: Fonts.attributes(size: 27))
 
         let itemsVC = ItemsListViewController(
             items: items.values.sorted { $0.title < $1.title },

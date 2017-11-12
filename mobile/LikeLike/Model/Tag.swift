@@ -8,6 +8,6 @@
 
 import Foundation
 
-struct Tag {
+struct Tag: Codable {
     let title: String
 }

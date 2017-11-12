@@ -8,7 +8,7 @@
 
 import Foundation
 
-final class Item {
+final class Item: Codable {
     let id: String
     var title: String
     var rating: Double

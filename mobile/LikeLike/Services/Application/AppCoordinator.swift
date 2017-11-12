@@ -12,11 +12,7 @@ final class AppCoordinator {
     private let navigationController = UINavigationController()
     private var window: UIWindow?
 
-    // TODO: Get get this from the data layer... after you've created one of those.
-    private var items = [
-        "1": Item(id: "1", title: "Thing 1", rating: 5),
-        "2": Item(id: "2", title: "Thing 2", rating: 4)
-    ]
+    private let dataStore: DataStore = FileStorage()
 
     func start(in window: UIWindow) {
         navigationController.navigationBar.backgroundColor = Colors.background
@@ -28,7 +24,7 @@ final class AppCoordinator {
         navigationController.navigationBar.titleTextAttributes = Fonts.addShadow(to: Fonts.attributes(size: 27))
 
         let itemsVC = ItemsListViewController(
-            items: items.values.sorted { $0.title < $1.title },
+            dataSource: DataStoreItemDataSource(dataStore: dataStore),
             itemSelected: showDetails
         )
         navigationController.pushViewController(itemsVC, animated: false)
@@ -40,6 +36,7 @@ final class AppCoordinator {
 
     func showDetails(for item: Item) {
         let vc = ItemDetailsViewController(item: item)
+
         navigationController.pushViewController(vc, animated: true)
     }
 }

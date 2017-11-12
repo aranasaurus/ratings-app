@@ -14,14 +14,14 @@ import UIKit
 // TODO: Put these TODOs in github issues :P
 
 class ItemsListViewController: UIViewController {
-    private var items: [Item] = []
+    var dataSource: ItemDataSource
 
     private let tableView: UITableView
 
     var itemSelected: (Item) -> Void
 
-    init(items: [Item], itemSelected: @escaping (Item) -> Void) {
-        self.items = items
+    init(dataSource: ItemDataSource, itemSelected: @escaping (Item) -> Void) {
+        self.dataSource = dataSource
         self.itemSelected = itemSelected
         self.tableView = UITableView(frame: .zero, style: .plain)
         super.init(nibName: nil, bundle: nil)
@@ -60,16 +60,18 @@ class ItemsListViewController: UIViewController {
         for path in tableView.indexPathsForSelectedRows ?? [] {
             tableView.deselectRow(at: path, animated: false)
         }
+        dataSource.reloadData()
+        tableView.reloadData()
     }
 }
 
 extension ItemsListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return items.count
+        return dataSource.itemCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let item = items[indexPath.row]
+        let item = dataSource.item(at: indexPath)
         let cell = tableView.dequeueReusableCell(withIdentifier: "ItemCell", for: indexPath) as! ItemCell
         cell.configure(with: item)
         return cell
@@ -78,6 +80,6 @@ extension ItemsListViewController: UITableViewDataSource {
 
 extension ItemsListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        itemSelected(items[indexPath.row])
+        itemSelected(dataSource.item(at: indexPath))
     }
 }

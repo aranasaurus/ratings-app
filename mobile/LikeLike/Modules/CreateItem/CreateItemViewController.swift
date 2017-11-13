@@ -16,6 +16,9 @@ final class CreateItemViewController: UIViewController {
         self.createItem = createItem
 
         super.init(nibName: nil, bundle: nil)
+        
+        title = "New Item"
+        navigationItem.largeTitleDisplayMode = .always
     }
 
     required init?(coder aDecoder: NSCoder) {

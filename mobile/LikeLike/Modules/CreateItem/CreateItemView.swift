@@ -48,6 +48,7 @@ final class CreateItemView: UIView {
         title.font = Fonts.normal
         title.placeholder = "Title"
         title.textColor = Colors.foreground
+        title.autocapitalizationType = .words
         stackView.addArrangedSubview(title)
         stackView.setCustomSpacing(8, after: title)
 

@@ -16,8 +16,8 @@ import UIKit
 class ItemsListViewController: UIViewController {
     var dataSource: ItemDataSource
 
-    private let tableView: UITableView
-    private var actions: [TargetAction] = []
+    private let tableView: UITableView = UITableView(frame: .zero, style: .plain)
+    private let addButton: UIButton = UIButton(type: .system)
 
     var itemSelected: (Item) -> Void
     var itemRemoved: (Item) -> Void
@@ -28,7 +28,6 @@ class ItemsListViewController: UIViewController {
         self.itemSelected = itemSelected
         self.itemRemoved = itemRemoved
         self.addItemTapped = addItemTapped
-        self.tableView = UITableView(frame: .zero, style: .plain)
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -40,6 +39,7 @@ class ItemsListViewController: UIViewController {
         super.viewDidLoad()
 
         title = "LikeLike"
+        navigationItem.largeTitleDisplayMode = .never
 
         view.backgroundColor = Colors.background
         view.addSubview(tableView)
@@ -59,7 +59,6 @@ class ItemsListViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
 
-        let addButton = UIButton(type: .system)
         addButton.translatesAutoresizingMaskIntoConstraints = false
         addButton.backgroundColor = Colors.foreground.withAlphaComponent(0.88)
         addButton.layer.cornerRadius = 8
@@ -70,9 +69,7 @@ class ItemsListViewController: UIViewController {
         attr[.shadow] = shadow
         let buttonTitle = NSAttributedString(string: "Add", attributes: attr)
         addButton.setAttributedTitle(buttonTitle, for: .normal)
-        let target = TargetAction { self.addItemTapped() }
-        actions.append(target)
-        addButton.addTarget(target, action: #selector(TargetAction.action), for: .touchUpInside)
+        addButton.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
         view.addSubview(addButton)
 
         let padding = CGFloat(64)
@@ -91,22 +88,22 @@ class ItemsListViewController: UIViewController {
 
         reloadData()
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        let padding = tableView.frame.maxY - addButton.frame.maxY
+        let offset = tableView.frame.maxY - addButton.frame.minY + padding
+        tableView.contentInset = UIEdgeInsets(top: tableView.contentInset.top, left: tableView.contentInset.left, bottom: offset, right: tableView.contentInset.right)
+    }
 
     func reloadData() {
         dataSource.reloadData()
         tableView.reloadData()
     }
-}
-
-final class TargetAction {
-    let handler: () -> Void
-
-    init(_ handler: @escaping () -> Void) {
-        self.handler = handler
-    }
-
-    @objc func action() {
-        handler()
+    
+    @objc private func addButtonTapped() {
+        addItemTapped()
     }
 }
 

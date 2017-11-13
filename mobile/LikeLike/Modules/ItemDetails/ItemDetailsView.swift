@@ -19,7 +19,6 @@ final class ItemDetailsView: UIView {
         }
     }
 
-    private let title: UILabel = UILabel()
     private let rating: UILabel = UILabel()
     private let imageView: UIImageView = UIImageView()
     private let comments: UITextView = UITextView()
@@ -42,14 +41,13 @@ final class ItemDetailsView: UIView {
     }
 
     func prepareForReuse() {
-        title.text = nil
         rating.text = nil
         imageView.image = nil
         comments.text = ""
     }
 
     private func setupSubviews() {
-        backgroundColor = Colors.background
+        backgroundColor = Colors.lightBackground
 
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
@@ -63,15 +61,7 @@ final class ItemDetailsView: UIView {
             stackView.trailingAnchor.constraint(equalTo: readableContentGuide.trailingAnchor)
         ])
 
-
-        title.textColor = Colors.foreground
-        title.backgroundColor = Colors.background
-        title.font = UIFont.preferredFont(forTextStyle: .largeTitle, compatibleWith: traitCollection)
-        stackView.addArrangedSubview(title)
-        stackView.setCustomSpacing(8, after: title)
-
-        rating.textColor = Colors.subtitle
-        rating.backgroundColor = Colors.background
+        rating.textColor = Colors.foreground
         rating.font = UIFont.preferredFont(forTextStyle: .title1, compatibleWith: traitCollection)
         rating.textAlignment = .right
         stackView.addArrangedSubview(rating)
@@ -85,7 +75,6 @@ final class ItemDetailsView: UIView {
     // TODO: update fonts as needed for system preference and trait collection changes
 
     private func configure(for item: Item) {
-        title.text = item.title
         rating.text = String(format: "%0.0f stars", item.rating)
         imageView.image = UIImage(contentsOfFile: item.photoUrl?.absoluteString ?? "")
     }

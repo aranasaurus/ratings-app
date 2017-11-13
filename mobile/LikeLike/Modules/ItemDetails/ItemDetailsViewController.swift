@@ -14,6 +14,7 @@ final class ItemDetailsViewController: UIViewController {
     init(item: Item) {
         detailsView = ItemDetailsView(item: item)
         super.init(nibName: nil, bundle: nil)
+        title = item.title
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -22,6 +23,8 @@ final class ItemDetailsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationItem.largeTitleDisplayMode = .always
 
         view.addSubview(detailsView)
         detailsView.translatesAutoresizingMaskIntoConstraints = false

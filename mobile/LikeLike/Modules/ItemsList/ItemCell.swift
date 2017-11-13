@@ -13,6 +13,8 @@ final class ItemCell: UITableViewCell {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
 
         backgroundColor = Colors.background.withAlphaComponent(0.57)
+        selectedBackgroundView = UIView()
+        selectedBackgroundView?.backgroundColor = Colors.lightBackground.withAlphaComponent(0.57)
         textLabel?.font = Fonts.bold
         textLabel?.shadowColor = Colors.shadow
         textLabel?.shadowOffset = CGSize(width: 0.75, height: 0.75)

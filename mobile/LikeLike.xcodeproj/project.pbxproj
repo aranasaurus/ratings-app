@@ -110,8 +110,6 @@
 		940E67621F5DA5BB002E76AA /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				940E67651F5DB12F002E76AA /* Application */,
-				9406C2131FB7CE5C0024E2A0 /* Theme */,
 				9406C2161FB7CF470024E2A0 /* Persistence */,
 			);
 			path = Services;
@@ -120,8 +118,12 @@
 		940E67651F5DB12F002E76AA /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				F9889A111FB968D3006A9150 /* GUI */,
+				9432DFA51F5DFA290075C7D3 /* Model */,
+				9406C2131FB7CE5C0024E2A0 /* Theme */,
 				94DBCA691F5CF56F0097061A /* AppDelegate.swift */,
 				940E67631F5DA62A002E76AA /* AppCoordinator.swift */,
+				94DBCA751F5CF56F0097061A /* Info.plist */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -185,12 +187,9 @@
 		94DBCA681F5CF56F0097061A /* LikeLike */ = {
 			isa = PBXGroup;
 			children = (
-				9432DFA51F5DFA290075C7D3 /* Model */,
+				940E67651F5DB12F002E76AA /* Application */,
 				942454141F5DD5C60019E067 /* Modules */,
 				940E67621F5DA5BB002E76AA /* Services */,
-				94DBCA701F5CF56F0097061A /* Assets.xcassets */,
-				94DBCA721F5CF56F0097061A /* LaunchScreen.storyboard */,
-				94DBCA751F5CF56F0097061A /* Info.plist */,
 			);
 			path = LikeLike;
 			sourceTree = "<group>";
@@ -202,6 +201,15 @@
 				94DBCA801F5CF5700097061A /* Info.plist */,
 			);
 			path = LikeLikeTests;
+			sourceTree = "<group>";
+		};
+		F9889A111FB968D3006A9150 /* GUI */ = {
+			isa = PBXGroup;
+			children = (
+				94DBCA701F5CF56F0097061A /* Assets.xcassets */,
+				94DBCA721F5CF56F0097061A /* LaunchScreen.storyboard */,
+			);
+			path = GUI;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

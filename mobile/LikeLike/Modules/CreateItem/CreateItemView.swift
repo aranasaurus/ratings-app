@@ -14,8 +14,6 @@ final class CreateItemView: UIView {
 
     // TODO: All the other views
 
-    private let stackView: UIStackView = UIStackView()
-
     private let saveHandler: () -> Void
 
     init(saveHandler: @escaping () -> Void) {
@@ -31,38 +29,38 @@ final class CreateItemView: UIView {
     }
 
     private func setupSubviews() {
-        backgroundColor = Colors.background
-
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .vertical
-        stackView.spacing = 16
-        stackView.isLayoutMarginsRelativeArrangement = true
-        addSubview(stackView)
-
-        NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 8),
-            stackView.leadingAnchor.constraint(equalTo: readableContentGuide.leadingAnchor),
-            stackView.trailingAnchor.constraint(equalTo: readableContentGuide.trailingAnchor)
-        ])
+        backgroundColor = Colors.midBackground
 
         title.font = Fonts.normal
-        title.placeholder = "Title"
+        title.attributedPlaceholder = NSAttributedString(string: "Enter a title...", attributes: [
+            NSAttributedStringKey.foregroundColor: Colors.highlight
+        ])
         title.textColor = Colors.foreground
         title.autocapitalizationType = .words
-        stackView.addArrangedSubview(title)
-        stackView.setCustomSpacing(8, after: title)
+        addSubview(title, constraints: [
+            align(\.leadingAnchor, to: \.readableContentGuide.leadingAnchor, constant: 8),
+            align(\.trailingAnchor, to: \.readableContentGuide.trailingAnchor, constant: -8),
+            align(\.topAnchor, to: \.safeAreaLayoutGuide.topAnchor, constant: 16)
+        ])
 
         rating.minimumValue = 0
         rating.maximumValue = 5
         rating.addTarget(self, action: #selector(sliderChanged(slider:)), for: .valueChanged)
-        stackView.addArrangedSubview(rating)
+        addSubview(rating)
+        rating.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            rating.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 32),
+            rating.leadingAnchor.constraint(equalTo: title.leadingAnchor),
+            rating.trailingAnchor.constraint(equalTo: title.trailingAnchor)
+        ])
 
         // TODO: Set up the other views.
 
         let save = UIButton(type: .system)
         save.setTitle("Save", for: .normal)
         save.addTarget(self, action: #selector(saveTapped), for: .touchUpInside)
-        stackView.addArrangedSubview(save)
+        save.applyTheme()
+        save.addToBottom(of: self)
     }
 
     @objc func sliderChanged(slider: UISlider) {

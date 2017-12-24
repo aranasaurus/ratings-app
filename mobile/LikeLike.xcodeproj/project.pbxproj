@@ -25,6 +25,8 @@
 		94DBCA711F5CF56F0097061A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94DBCA701F5CF56F0097061A /* Assets.xcassets */; };
 		94DBCA741F5CF56F0097061A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94DBCA721F5CF56F0097061A /* LaunchScreen.storyboard */; };
 		94DBCA7F1F5CF5700097061A /* LikeLikeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DBCA7E1F5CF5700097061A /* LikeLikeTests.swift */; };
+		F9589E5A1FF0186D00509462 /* AutoLayoutExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9589E591FF0186D00509462 /* AutoLayoutExtensions.swift */; };
+		F9F12B101FF02C5700F9C6BC /* StyleExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F12B0F1FF02C5700F9C6BC /* StyleExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +62,8 @@
 		94DBCA7A1F5CF5700097061A /* LikeLikeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LikeLikeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		94DBCA7E1F5CF5700097061A /* LikeLikeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeLikeTests.swift; sourceTree = "<group>"; };
 		94DBCA801F5CF5700097061A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F9589E591FF0186D00509462 /* AutoLayoutExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoLayoutExtensions.swift; sourceTree = "<group>"; };
+		F9F12B0F1FF02C5700F9C6BC /* StyleExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +89,7 @@
 			children = (
 				940E67661F5DB1E3002E76AA /* Colors.swift */,
 				9406C2111FB7C13E0024E2A0 /* Fonts.swift */,
+				F9F12B0F1FF02C5700F9C6BC /* StyleExtensions.swift */,
 			);
 			path = Theme;
 			sourceTree = "<group>";
@@ -111,6 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				9406C2161FB7CF470024E2A0 /* Persistence */,
+				F9589E5B1FF0187600509462 /* Extensions */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -201,6 +207,14 @@
 				94DBCA801F5CF5700097061A /* Info.plist */,
 			);
 			path = LikeLikeTests;
+			sourceTree = "<group>";
+		};
+		F9589E5B1FF0187600509462 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				F9589E591FF0186D00509462 /* AutoLayoutExtensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		F9889A111FB968D3006A9150 /* GUI */ = {
@@ -316,6 +330,7 @@
 			files = (
 				9406C21C1FB7DB1E0024E2A0 /* ItemDataSource.swift in Sources */,
 				947D4BC21FA27D65005ED7BC /* Tag.swift in Sources */,
+				F9F12B101FF02C5700F9C6BC /* StyleExtensions.swift in Sources */,
 				9432DFA41F5DF9040075C7D3 /* Item.swift in Sources */,
 				947D4BBE1FA278D6005ED7BC /* ItemDetailsView.swift in Sources */,
 				940E67641F5DA62A002E76AA /* AppCoordinator.swift in Sources */,
@@ -326,6 +341,7 @@
 				9406C2121FB7C13E0024E2A0 /* Fonts.swift in Sources */,
 				94DBCA6A1F5CF56F0097061A /* AppDelegate.swift in Sources */,
 				9406C2211FB7FE140024E2A0 /* CreateItemView.swift in Sources */,
+				F9589E5A1FF0186D00509462 /* AutoLayoutExtensions.swift in Sources */,
 				9406C21F1FB7FDD00024E2A0 /* CreateItemViewController.swift in Sources */,
 				9432DFA91F5DFB560075C7D3 /* ItemCell.swift in Sources */,
 				947D4BBC1FA277A6005ED7BC /* ItemDetailsViewController.swift in Sources */,
@@ -475,7 +491,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JCYYKWU6KX;
-				INFOPLIST_FILE = LikeLike/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/LikeLike/Application/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.aranasaurus.LikeLike;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -490,7 +506,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JCYYKWU6KX;
-				INFOPLIST_FILE = LikeLike/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/LikeLike/Application/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.aranasaurus.LikeLike;
 				PRODUCT_NAME = "$(TARGET_NAME)";

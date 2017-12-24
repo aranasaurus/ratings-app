@@ -11,6 +11,7 @@ import UIKit
 struct Colors {
     private init() { }
     static let background: UIColor = UIColor(named: "BackgroundColor")!
+    static let midBackground: UIColor = UIColor(named: "MidBackgroundColor")!
     static let lightBackground: UIColor = UIColor(named: "LightBackgroundColor")!
     static let foreground: UIColor = UIColor(named: "ForegroundColor")!
     static let shadow: UIColor = UIColor(named: "ShadowColor")!

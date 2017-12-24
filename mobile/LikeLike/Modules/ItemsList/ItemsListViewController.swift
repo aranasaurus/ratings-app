@@ -60,24 +60,10 @@ class ItemsListViewController: UIViewController {
         tableView.delegate = self
 
         addButton.translatesAutoresizingMaskIntoConstraints = false
-        addButton.backgroundColor = Colors.foreground.withAlphaComponent(0.88)
-        addButton.layer.cornerRadius = 8
-        var attr = Fonts.attributes(size: 36)
-        attr[.foregroundColor] = Colors.background
-        let shadow = Fonts.shadow()
-        shadow.shadowColor = Colors.lightBackground
-        attr[.shadow] = shadow
-        let buttonTitle = NSAttributedString(string: "Add", attributes: attr)
-        addButton.setAttributedTitle(buttonTitle, for: .normal)
+        addButton.setTitle("Add", for: .normal)
         addButton.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
-        view.addSubview(addButton)
-
-        let padding = CGFloat(64)
-        NSLayoutConstraint.activate([
-            addButton.bottomAnchor.constraint(equalTo: guide.bottomAnchor, constant: -14),
-            addButton.leftAnchor.constraint(equalTo: guide.leftAnchor, constant: padding),
-            addButton.rightAnchor.constraint(equalTo: guide.rightAnchor, constant: -padding)
-        ])
+        addButton.applyTheme()
+        addButton.addToBottom(of: view)
     }
 
     override func viewWillAppear(_ animated: Bool) {

@@ -12,7 +12,7 @@ final class ItemCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
 
-        backgroundColor = Colors.background.withAlphaComponent(0.57)
+        backgroundColor = Colors.midBackground
         selectedBackgroundView = UIView()
         selectedBackgroundView?.backgroundColor = Colors.lightBackground.withAlphaComponent(0.57)
         textLabel?.font = Fonts.bold
